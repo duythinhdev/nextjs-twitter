@@ -13,7 +13,7 @@ function UserForm() {
         }
         if (username === '') {
             const defaultUsername = userInfo?.email?.split('@')[0];
-            setUsername(defaultUsername.replace(/[^a-z]+/gi,''));
+            setUsername(defaultUsername?.replace(/[^a-z]+/gi,''));
         }
     }, [status])
 
