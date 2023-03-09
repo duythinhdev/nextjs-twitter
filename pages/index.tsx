@@ -1,28 +1,12 @@
 import {signOut, useSession} from "next-auth/react";
 import {useEffect, useState} from "react";
 import UserNameForm from "../components/userForm";
+import useUserInfo from "@/hook/useUserInfo";
 
 export default function Home() {
-    const {data: session, status} = useSession() as any;
-    const [userInfo, setUserInfo] = useState() as any;
-    const [userStatus, setUserStatus] = useState('loading');
+    const [userInfo,status] = useUserInfo() as any;
 
-    function getUserInfo() {
-        if (status == 'loading') {
-            return;
-        }
-        fetch(`/api/users?id=${session.user.id}`).then(res => {
-            res.json().then(json => {
-                setUserInfo(json?.user);
-                setUserStatus('done');
-            })
-        });
-    }
-
-    useEffect(() => {
-        getUserInfo();
-    }, [status])
-    if(userStatus == 'loading'){
+    if(status == 'loading'){
         return 'loading user info';
     }
     if(!userInfo?.username){
@@ -31,7 +15,7 @@ export default function Home() {
 
     return (
         <div>
-            test
+            homepage logged in {userInfo.username}
         </div>
     )
 }

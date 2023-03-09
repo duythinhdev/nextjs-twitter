@@ -3,7 +3,7 @@ import useUserInfo from "../hook/useUserInfo";
 import {useRouter} from "next/router";
 
 function UserForm() {
-    const {userInfo,status} = useUserInfo() as any;
+    const [userInfo,status] = useUserInfo() as any;
     const [username, setUsername] = useState('');
     const router = useRouter();
 
